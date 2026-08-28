@@ -1,0 +1,10 @@
+# Scraped data — isme 97 asli logon ke naam hain, repo mein nahi jayega
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
