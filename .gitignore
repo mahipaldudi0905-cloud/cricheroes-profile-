@@ -1,5 +1,8 @@
-# Scraped data — isme 97 asli logon ke naam hain, repo mein nahi jayega
+# Scraped data aur input sheets — inme asli logon ke naam, mobile,
+# Aadhaar tak hote hain. Repo mein kabhi nahi jayenge.
 *.csv
+*.xlsx
+*.xls
 
 # Python
 __pycache__/
