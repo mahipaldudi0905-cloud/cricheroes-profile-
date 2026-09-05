@@ -274,11 +274,14 @@ def main():
     ap = argparse.ArgumentParser(
         description="Excel/CSV mein diye CricHeroes player links -> stats CSV")
     ap.add_argument("input", help="Excel (.xlsx) ya CSV file")
-    ap.add_argument("-o", "--output", help="CSV path (default: <input>_stats.csv)")
+    ap.add_argument("-o", "--output",
+                    help="alag file mein likho (.csv ya .xlsx). Default: Excel "
+                         "diya to usi mein, CSV diya to <naam>_stats.csv")
     ap.add_argument("--column", help="player link/ID wali column ka naam "
                                      "(default: khud detect)")
     ap.add_argument("--in-place", action="store_true",
-                    help="usi Excel file mein columns jod do (backup bhi banta hai)")
+                    help="CSV ke liye bhi usi file mein likho (Excel mein "
+                         "ye pehle se default hai)")
     ap.add_argument("--all-stats", action="store_true",
                     help="maange gaye columns ke alawa har available stat bhi")
     ap.add_argument("--delay", type=float, default=0.4,
@@ -357,11 +360,14 @@ def main():
     header = headers + [c for c in added if c not in headers] \
              + stat_cols + extra_cols + ["profile_url"]
 
-    if args.in_place:
+    # Excel diya aur -o nahi bataya -> usi Excel mein columns jod do.
+    # Yahi aam kaam hai; backup apne aap ban jata hai.
+    if args.output:
+        out_path = os.path.expanduser(args.output)
+    elif args.in_place or src.lower().endswith((".xlsx", ".xlsm")):
         out_path = src
     else:
-        out_path = os.path.expanduser(
-            args.output or os.path.splitext(src)[0] + "_stats.csv")
+        out_path = os.path.splitext(src)[0] + "_stats.csv"
 
     new_cols = [c for c in header if c not in headers]
     if out_path.lower().endswith((".xlsx", ".xlsm")):
@@ -374,7 +380,8 @@ def main():
                 w.writerow({k: r.get(k, "") for k in header})
 
     ok = len(out_rows) - len(failed) - len(no_id)
-    print(f"[3/3] CSV saved      : {out_path}")
+    same = os.path.abspath(out_path) == os.path.abspath(src)
+    print(f"[3/3] {'Usi file mein' if same else 'Nayi file'}  : {out_path}")
     print(f"      {len(out_rows)} rows x {len(header)} columns -- {ok} ke stats mile")
     if no_id:
         print(f"      ID nahi mili ({len(no_id)}): {', '.join(no_id[:5])}"

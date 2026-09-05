@@ -26,11 +26,16 @@ jayenge.
 
     python3 cricheroes_batch.py <excel-ya-csv> [options]
 
-    python3 cricheroes_batch.py ~/Desktop/players.xlsx
+Aam kaam bas itna hai — Excel do, usi Excel mein data aa jayega
+(backup apne aap ban jati hai):
+
+    python3 cricheroes_batch.py ~/Downloads/players.xlsx
+
+Zaroorat pade to:
+
     python3 cricheroes_batch.py players.xlsx -o ~/Desktop/stats.csv
     python3 cricheroes_batch.py players.xlsx --column "CricHeroes Link"
     python3 cricheroes_batch.py players.csv --all-stats
-    python3 cricheroes_batch.py players.xlsx --in-place
 
 Input file aisi ho sakti hai:
 
@@ -49,9 +54,13 @@ poora share message bhi chalta hai — script redirect follow karke asli ID
 nikaal leti hai. Column `id_source` batati hai har ID kahan se aayi, taaki
 galat entry pakdi ja sake.
 
-`--in-place` se nayi columns usi Excel file mein jud jati hain (purani
-columns ko haath nahi lagta) aur saath mein `<naam>.backup.xlsx` ban jati
-hai.
+Excel dene par nayi columns usi file mein jud jati hain — purani columns
+ko haath nahi lagta — aur saath mein `<naam>.backup.xlsx` ban jati hai.
+Alag file chahiye to `-o` de dijiye.
+
+**Zaroori:** sheet mein CricHeroes ID/link wali column honi chahiye. Agar
+registration form mein ye field poocha hi nahi gaya, to script kuch nahi
+kar sakti — naam se player dhoondhne ka koi public API nahi hai.
 
 Format `.xlsx` ya `.csv` — purana `.xls` support nahi hai (Excel mein
 Save As karke `.xlsx` bana lijiye).
@@ -59,7 +68,7 @@ Save As karke `.xlsx` bana lijiye).
 ## Common options
 
     -o, --output      output path (.csv ya .xlsx)
-    --in-place        usi Excel file mein columns jod do (+ backup)
+    --in-place        CSV ke liye bhi usi file mein likho
     --column          link/ID wali column ka naam (default: khud detect)
     --all-stats       maange gaye columns ke alawa har available stat
     --delay           do players ke beech seconds (default: 0.4)
