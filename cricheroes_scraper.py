@@ -183,6 +183,7 @@ WANTED = [
     ("bowl_innings",    "bowling",  "innings"),
     ("bowl_overs",      "bowling",  "overs"),
     ("bowl_wickets",    "bowling",  "wickets"),
+    ("bowl_economy",    "bowling",  "economy"),
     ("field_matches",   "fielding", "matches"),
     ("field_catches",   "fielding", "catches"),
     ("field_run_outs",  "fielding", "run outs"),
