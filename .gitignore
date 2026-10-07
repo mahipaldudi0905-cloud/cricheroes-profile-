@@ -3,6 +3,9 @@
 *.csv
 *.xlsx
 *.xls
+dpl_add_list.json
+dpl_add_log.*
+ui_dumps/
 
 # Python
 __pycache__/
